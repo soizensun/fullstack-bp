@@ -33,6 +33,9 @@ out/
 build
 dist
 
+# File-backed example store (TODO_DATA_DIR)
+.data/
+
 # IDEs and editors
 /.idea
 .project
