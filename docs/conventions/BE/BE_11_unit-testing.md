@@ -4,7 +4,7 @@ id: "BE_11"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_05]
 see_also: [BE_12, FE_13]
 ---
@@ -13,7 +13,7 @@ see_also: [BE_12, FE_13]
 
 # [BE] Unit testing
 
-`P1` · `BE_11` · `draft` · `updated 2026-08-31`
+`P1` · `BE_11` · `draft` · `updated 2026-09-19`
 
 **Open when:** you wrote domain or use-case code.
 
@@ -191,6 +191,8 @@ The entity gets its own suite, smaller and faster still: the transition table, t
 ## Related
 
 Requires [BE_05](../index.html#BE_05). See also [BE_12](../index.html#BE_12), [FE_13](../index.html#FE_13).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/domain/entity/todo-list.entity.spec.ts`, `apps/api/test/support/`
 
 ---
 

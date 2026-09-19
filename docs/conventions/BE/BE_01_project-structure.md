@@ -4,7 +4,7 @@ id: "BE_01"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [INFRA_01]
 see_also: [BE_02, BE_03]
 ---
@@ -13,7 +13,7 @@ see_also: [BE_02, BE_03]
 
 # [BE] Project structure & module anatomy
 
-`P1` · `BE_01` · `draft` · `updated 2026-08-31`
+`P1` · `BE_01` · `draft` · `updated 2026-09-19`
 
 **Open when:** you are adding a module, or you do not know where a backend file belongs.
 
@@ -66,14 +66,16 @@ modules/<context>/              a context with more than one aggregate
   shared/domain/                concepts both submodules own
   shared/application/           read contracts both submodules use
   <submodule>/                  the anatomy above, per aggregate
-  application/                  use-cases/ dto/ query-port/
-                                query-service/ adapter/
+  application/                  use-cases/ dto/ query-port/ port/
+                                service/ types/ adapter/
                                 <name>.errors.ts
-  infrastructure/               entity/ mapper/ repository/
+  infrastructure/               entity/ mapper/ repository/ query/
   presentation/                 <name>.controller.ts
 ```
 
 What each layer may import is [BE_02](../index.html#BE_02); what `domain/port/` means next to `domain/repository/` is [BE_03](../index.html#BE_03) and [BE_06](../index.html#BE_06). Here they are only places. An empty role folder is noise — add it with its first file.
+
+Four of these were added after the first module was built, because the original list had nowhere to put things the other documents require: `application/port/` for an outbound contract that is not a query ([BE_02#R6](../index.html#BE_02)), `application/service/` for the application service [BE_05#R10](../index.html#BE_05) creates when two use cases share a workflow, `application/types/` for the projections a query contract returns, and `infrastructure/query/` for the implementation behind that contract ([BE_06#R7](../index.html#BE_06)).
 
 **Enforcement:** review — the folder vocabulary is checkable and is a candidate guardrail ([INFRA_06](../index.html#INFRA_06)).
 
@@ -172,6 +174,8 @@ When billing later grows its own aggregate, the directory becomes `modules/subsc
 ## Related
 
 Requires [INFRA_01](../index.html#INFRA_01). See also [BE_02](../index.html#BE_02), [BE_03](../index.html#BE_03).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/`, `apps/api/src/modules/activity-log/`
 
 ---
 

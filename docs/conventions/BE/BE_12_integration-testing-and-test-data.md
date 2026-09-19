@@ -4,7 +4,7 @@ id: "BE_12"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_11, BE_06]
 see_also: [INFRA_12]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_12]
 
 # [BE] Integration testing & test data
 
-`P1` · `BE_12` · `draft` · `updated 2026-08-31`
+`P1` · `BE_12` · `draft` · `updated 2026-09-19`
 
 **Open when:** the thing you wrote touches the database, Redis, or a module boundary.
 
@@ -24,7 +24,7 @@ Module-level tests against a real Redis and database in containers, isolation an
 If you read nothing else:
 
 1. <a id="R1"></a>Write an integration test where your code meets something real: a store, a cache, a queue, or another module's contract.
-2. <a id="R2"></a>Run against the real backing service in a container. Never substitute an in-memory imitation of it.
+2. <a id="R2"></a>Run against the real backing service — in a container where it needs one. Never substitute an in-memory imitation of it.
 3. <a id="R3"></a>Every test creates the data it needs and removes what it created.
 4. <a id="R4"></a>Assume no order and no shared state. A test must pass alone, repeated, and beside its neighbours.
 5. <a id="R5"></a>Exercise an adapter through its port, never through the driver underneath it.
@@ -172,6 +172,8 @@ What is not here: whether an article may be published, who may publish it, what 
 ## Related
 
 Requires [BE_11](../index.html#BE_11), [BE_06](../index.html#BE_06). See also [INFRA_12](../index.html#INFRA_12).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/infrastructure/repository/file-todo-list.repository.integration-spec.ts`
 
 ---
 

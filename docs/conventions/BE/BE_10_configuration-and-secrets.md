@@ -4,7 +4,7 @@ id: "BE_10"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [INFRA_07, GEN_09]
 ---
 
@@ -12,7 +12,7 @@ requires: [INFRA_07, GEN_09]
 
 # [BE] Configuration & secrets in the application
 
-`P1` · `BE_10` · `draft` · `updated 2026-08-31`
+`P1` · `BE_10` · `draft` · `updated 2026-09-19`
 
 **Open when:** the code needs a value that differs per environment.
 
@@ -168,6 +168,8 @@ Finally, what the change looks like in review: a schema entry, an example entry,
 ## Related
 
 Requires [INFRA_07](../index.html#INFRA_07), [GEN_09](../index.html#GEN_09).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/config/`
 
 ---
 

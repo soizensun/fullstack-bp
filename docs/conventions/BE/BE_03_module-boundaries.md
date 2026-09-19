@@ -4,7 +4,7 @@ id: "BE_03"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_02]
 see_also: [INFRA_03, BE_16]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_03, BE_16]
 
 # [BE] Module boundaries & independence
 
-`P1` · `BE_03` · `draft` · `updated 2026-08-31`
+`P1` · `BE_03` · `draft` · `updated 2026-09-19`
 
 **Open when:** one module needs something that belongs to another.
 
@@ -180,6 +180,8 @@ The tempting shortcut is one query joining reports to articles, ordered and pagi
 ## Related
 
 Requires [BE_02](../index.html#BE_02). See also [INFRA_03](../index.html#INFRA_03), [BE_16](../index.html#BE_16).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/activity-log/index.ts`, `apps/api/src/modules/todo/todo.module.ts`
 
 ---
 

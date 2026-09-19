@@ -4,7 +4,7 @@ id: "BE_09"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_08]
 see_also: [FE_18]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_18]
 
 # [BE] Error handling & error taxonomy
 
-`P1` · `BE_09` · `draft` · `updated 2026-08-31`
+`P1` · `BE_09` · `draft` · `updated 2026-09-19`
 
 **Open when:** something can fail — so, always.
 
@@ -186,6 +186,8 @@ A last note on validation. A request that fails schema parsing never reaches a u
 ## Related
 
 Requires [BE_08](../index.html#BE_08). See also [FE_18](../index.html#FE_18).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/domain/todo.errors.ts`, `apps/api/src/shared/presentation/coded-error.filter.ts`
 
 ---
 

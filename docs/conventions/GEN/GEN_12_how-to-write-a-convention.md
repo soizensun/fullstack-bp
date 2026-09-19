@@ -4,7 +4,7 @@ id: "GEN_12"
 area: "GEN"
 tier: "P1"
 status: "stable"
-updated: "2026-08-25"
+updated: "2026-09-19"
 requires: [GEN_01]
 ---
 
@@ -12,7 +12,7 @@ requires: [GEN_01]
 
 # [General] How to write a convention document
 
-`P1` · `GEN_12` · `stable` · `updated 2026-08-25`
+`P1` · `GEN_12` · `stable` · `updated 2026-09-19`
 
 **Open when:** you are writing or updating a document in this folder.
 
@@ -29,7 +29,7 @@ If you read nothing else:
 3. <a id="R3"></a>Use the required sections, in order, with those names. Add no others.
 4. <a id="R4"></a>At most ten rules, each an imperative one-liner with a stable id.
 5. <a id="R5"></a>Every rule states its enforcement as `automated`, `partly automated`, `review` or `unenforced` — and never claims automation that does not exist today.
-6. <a id="R6"></a>Never state a project fact. State the condition and let the reader check `PROJECT.md`.
+6. <a id="R6"></a>Never state a project fact. State the condition and let the reader check `PROJECT.md` — except for the one **Reference implementation** line [R3](#R3) allows.
 7. <a id="R7"></a>One subject, one document. Cite another document's id instead of restating its rule.
 8. <a id="R8"></a>700–1,400 words of explanatory prose — the scaffolding this document mandates does not count.
 9. <a id="R9"></a>Use the template and the shared stylesheet. No `<style>` block, no classes outside the list.
@@ -62,7 +62,7 @@ In this order, with these names. Omit an optional section entirely rather than w
 | 5 | **Worked example** | yes | One realistic end-to-end example from this stack. |
 | 6 | **Checklist** | yes | Copy-pasteable into a pull request. Mirrors the rules. |
 | 7 | **Open questions** | optional | What this document could not decide. See [R5](#R5). |
-| 8 | Related | yes | The index relations, as ids. No prose. |
+| 8 | Related | yes | The index relations, as ids. No prose. May end with one **Reference implementation** line — see below. |
 
 **Enforcement:** automated — section names and order are checkable ([INFRA_06](../index.html#INFRA_06)).
 
@@ -123,7 +123,25 @@ does not apply yet.
 Redis is not installed yet, so skip this.
 ```
 
-**Enforcement:** review — a phrase list would catch the obvious cases and is a candidate guardrail ([INFRA_06](../index.html#INFRA_06)).
+The one exception is a **Reference implementation** line at the end of **Related**, naming example code that demonstrates the document's rules — the reasoning is in `docs/adr/0004-conventions-may-cite-a-reference-implementation.md`. It is narrow on purpose: one line, only in **Related**, only pointing at code `PROJECT.md` §3 lists as example code, and phrased as a condition so a project that deleted the example deletes the line with it. No rule, no worked example and no paragraph may cite a path.
+
+**Do**
+
+```
+Requires [BE_02](../index.html#BE_02). See also [BE_06](../index.html#BE_06).
+Reference implementation, where PROJECT.md §3 still lists it:
+`apps/api/src/modules/todo/domain/`
+```
+
+**Don't**
+
+```
+R4: Name a method after the business action — see
+    apps/api/src/modules/todo/domain/entity/todo-list.entity.ts
+    for how we do it.
+```
+
+**Enforcement:** review — a phrase list would catch the obvious cases, and a check that every **Reference implementation** path still exists is the cheapest outstanding guardrail ([INFRA_06](../index.html#INFRA_06)).
 
 ### [R8](#R8) The length budget
 

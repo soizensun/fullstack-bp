@@ -4,7 +4,7 @@ id: "BE_08"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_07]
 see_also: [GEN_11]
 ---
@@ -13,7 +13,7 @@ see_also: [GEN_11]
 
 # [BE] DTOs, validation & serialization
 
-`P1` · `BE_08` · `draft` · `updated 2026-08-31`
+`P1` · `BE_08` · `draft` · `updated 2026-09-19`
 
 **Open when:** data enters or leaves the API.
 
@@ -184,6 +184,8 @@ One boundary is easy to forget. The same article is also published by a schedule
 ## Related
 
 Requires [BE_07](../index.html#BE_07). See also [GEN_11](../index.html#GEN_11).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/presentation/dto/`
 
 ---
 

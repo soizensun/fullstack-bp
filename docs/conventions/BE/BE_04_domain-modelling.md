@@ -4,7 +4,7 @@ id: "BE_04"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_02]
 see_also: [GEN_11, GEN_14]
 ---
@@ -13,7 +13,7 @@ see_also: [GEN_11, GEN_14]
 
 # [BE] Domain modelling
 
-`P1` · `BE_04` · `draft` · `updated 2026-08-31`
+`P1` · `BE_04` · `draft` · `updated 2026-09-19`
 
 **Open when:** you are creating or changing a business concept.
 
@@ -197,6 +197,8 @@ Finally, the counter-example. The article's *category* is a name and a code, rea
 ## Related
 
 Requires [BE_02](../index.html#BE_02). See also [GEN_11](../index.html#GEN_11), [GEN_14](../index.html#GEN_14).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/domain/`
 
 ---
 
