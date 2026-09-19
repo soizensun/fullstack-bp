@@ -43,10 +43,17 @@ shape as a convention unless a document in `docs/conventions/` says so.
 
 | Path | What it is |
 |---|---|
-| `apps/api/src/links/**` | Example Nest module — controller, service, spec |
+| `apps/api/src/modules/todo/**` | **The BE reference implementation.** Demonstrates `BE_01`–`BE_13`; the convention documents point back at it (ADR 0004) |
+| `apps/api/src/modules/activity-log/**` | Second module, so `BE_03`'s cross-module ports have something to show |
+| `apps/api/src/shared/**`, `apps/api/src/config/**` | Supporting layers of the same example — clock and id ports, file store, error filter, config |
+| `apps/api/test/**`, `features/todo-list.feature` | Its unit, integration, e2e and Gherkin suites |
+| `apps/api/src/links/**` | Older example Nest module — predates the conventions and sits outside `modules/`, so it violates `BE_01` R1/R2. Prefer `todo` as the pattern to copy |
 | `packages/api/src/links/**` | Its DTOs and entity |
 | `packages/ui/src/{button,card,code}.tsx` | Example shared components |
 | `apps/web/app/page.tsx` | Default Next.js landing page |
+
+Deleting the todo and activity-log modules means deleting the **Reference implementation**
+lines in `BE_01`–`BE_13` that point at them (`GEN_03` R5, ADR 0004).
 
 ## 4. Stack
 
@@ -59,13 +66,17 @@ and propose the addition — do not quietly install it.
 | Turborepo, Bun workspaces | **present** | turbo 2.10, bun 1.3.11 |
 | NestJS 11 API | **present** | `apps/api`, listens on `:3000` |
 | Next.js 16 App Router, React 19 | **present** | `apps/web` on `:3001`, CSS Modules + `globals.css` |
-| Jest 30 (+ ts-jest, supertest) | **present** | shared bases in `@repo/jest-config`; API only |
+| Jest 30 (+ ts-jest, supertest) | **present** | shared bases in `@repo/jest-config`; API only. Unit, integration (`*.integration-spec.ts`) and e2e run as separate tasks |
 | ESLint 9 flat config + Prettier | **present** | see open decision 2 |
+| Zod 4 + `nestjs-zod` 5 | **present** | API only. One schema per operation, type derived (`BE_08` R3) |
+| `@nestjs/swagger` 11 + Scalar | **present** | API only. OpenAPI generated from the app at `/openapi.json`; Scalar UI at `/reference`. Pinned to the 11.x line — v12 needs NestJS 12 |
+| `uuid` 11 | **present** | UUIDv7 (`GEN_11`). v14 is ESM-only and cannot be required from the Jest CommonJS runtime |
+| Gherkin e2e (Cucumber 13) | **present** | `features/` at the repo root; `@api` step definitions in `apps/api/test/steps`. Run with `turbo run test:bdd` |
+| File-backed example store | **present** | `TODO_DATA_DIR`, JSON files. Stands in for a database so the example needs no service |
 | Biome | *planned* | the intended linter and formatter |
 | Tailwind CSS | *planned* | not installed anywhere |
 | Design tokens / Figma pipeline | *planned* | no tokens package exists |
 | Redis, database, outbox, background jobs | *planned* | no backing services, no Docker, no compose |
-| Gherkin e2e | *planned* | no `features/` directory |
 | CI/CD | *planned* | no `.github/workflows` |
 
 ## 5. Open decisions
@@ -76,7 +87,10 @@ settle it on your own. Record the answer as an ADR (`GEN_13`) and delete the row
 1. **The BE↔FE contract.** `GEN_08` states the API app owns the contract and the web app
    consumes types generated from OpenAPI. The repository currently does the opposite:
    `packages/api` is a hand-written shared DTO package imported by both apps. One of the
-   two has to change.
+   two has to change. *Half-settled:* the API app now generates the OpenAPI document
+   (`GEN_08` R2, `BE_07` R10), but nothing generates a client from it, and the todo module
+   keeps its DTOs local rather than adding a second contract path. The remaining question
+   is whether `packages/api` becomes generated output or is replaced.
 2. **ESLint → Biome.** The intended stack is Biome; the repository is wired for ESLint 9
    with per-workspace flat configs plus Prettier. `INFRA_05` and `INFRA_06` assume Biome.
 3. **Frontend test runner.** Jest is configured for the API app. Nothing is configured for

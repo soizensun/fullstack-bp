@@ -1,17 +1,86 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "tasks": {
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": [
+        "TODO_DATA_DIR",
+        "TODO_DEFAULT_PAGE_SIZE",
+        "TODO_MAX_PAGE_SIZE",
+        "NODE_ENV",
+        "PORT"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "dist/**"
+      ],
+      "env": [
+        "TODO_DATA_DIR",
+        "TODO_DEFAULT_PAGE_SIZE",
+        "TODO_MAX_PAGE_SIZE",
+        "NODE_ENV",
+        "PORT"
+      ]
     },
     "lint": {},
-    "test": {},
-    "test:e2e": {}
+    "test": {
+      "env": [
+        "TODO_DATA_DIR",
+        "TODO_DEFAULT_PAGE_SIZE",
+        "TODO_MAX_PAGE_SIZE",
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "test:e2e": {
+      "env": [
+        "TODO_DATA_DIR",
+        "TODO_DEFAULT_PAGE_SIZE",
+        "TODO_MAX_PAGE_SIZE",
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "check-types": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test:integration": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "TODO_DATA_DIR",
+        "TODO_DEFAULT_PAGE_SIZE",
+        "TODO_MAX_PAGE_SIZE",
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "test:bdd": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "TODO_DATA_DIR",
+        "TODO_DEFAULT_PAGE_SIZE",
+        "TODO_MAX_PAGE_SIZE",
+        "NODE_ENV",
+        "PORT"
+      ]
+    },
+    "check-arch": {}
   }
 }

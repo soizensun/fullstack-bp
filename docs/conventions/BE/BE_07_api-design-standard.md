@@ -4,7 +4,7 @@ id: "BE_07"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_05, GEN_08]
 see_also: [BE_08]
 ---
@@ -13,7 +13,7 @@ see_also: [BE_08]
 
 # [BE] API design standard
 
-`P1` · `BE_07` · `draft` · `updated 2026-08-31`
+`P1` · `BE_07` · `draft` · `updated 2026-09-19`
 
 **Open when:** you are adding or changing an HTTP endpoint.
 
@@ -78,10 +78,13 @@ GET    /v1/authors/:id/articles/:id/comments/:id/replies
 | Replace | `PUT` | `200` |
 | Change some fields | `PATCH` | `200` |
 | Delete | `DELETE` | `204` |
+| Change state and return nothing | `PATCH` / `POST` | `204` |
 | Action, finished when the response is sent | `POST` | `200` |
 | Action accepted, work continues after the response | `POST` | `202` |
 
 `GET` and `DELETE` carry no body. `GET` never changes state — not a counter, not a "last seen" timestamp; that is a `POST` to its own resource. Failures never arrive as `200` with an error field: the status is part of the answer, and the mapping from a failure to its status is [BE_09](../index.html#BE_09)'s.
+
+A route that only changes state answers `204`, because answering `200` with the resource would force its use case to read as well as write, which [BE_05#R3](../index.html#BE_05) forbids — `docs/adr/0005-state-changing-routes-answer-204.md` has the reasoning. `200` is for an action that produces a result of its own, such as reporting which items a bulk change touched; `201` still returns the new resource's identity, which is a product of the write rather than a read of it.
 
 **Enforcement:** partly automated — the generated specification lists every declared status, so a mismatch is visible in review; nothing rejects a wrong one today.
 
@@ -208,6 +211,8 @@ The deletion is worth one note. `DELETE` returns `204` whether or not the articl
 ## Related
 
 Requires [BE_05](../index.html#BE_05), [GEN_08](../index.html#GEN_08). See also [BE_08](../index.html#BE_08).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/presentation/todo-list.controller.ts`
 
 ---
 
