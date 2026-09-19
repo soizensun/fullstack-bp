@@ -3,8 +3,8 @@ title: "INFRA_01 · Monorepo structure (Turborepo)"
 id: "INFRA_01"
 area: "INFRA"
 tier: "P0"
-status: "draft"
-updated: "2026-08-31"
+status: "stable"
+updated: "2026-09-19"
 requires: [GEN_01]
 see_also: [INFRA_03, BE_01, FE_01]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_03, BE_01, FE_01]
 
 # [Infra] Monorepo structure (Turborepo)
 
-`P0` · `INFRA_01` · `draft` · `updated 2026-08-31`
+`P0` · `INFRA_01` · `stable` · `updated 2026-09-19`
 
 **Open when:** you are adding a workspace, or you do not know where a file belongs.
 

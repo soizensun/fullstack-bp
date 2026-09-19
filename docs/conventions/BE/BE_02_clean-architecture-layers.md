@@ -4,7 +4,7 @@ id: "BE_02"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_01]
 see_also: [INFRA_06]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_06]
 
 # [BE] Clean architecture — the layers and the dependency rule
 
-`P1` · `BE_02` · `draft` · `updated 2026-08-31`
+`P1` · `BE_02` · `draft` · `updated 2026-09-19`
 
 **Open when:** you are about to import something across layers.
 
@@ -213,6 +213,8 @@ Now the inverted version, which is what this document exists to prevent. Someone
 ## Related
 
 Requires [BE_01](../index.html#BE_01). See also [INFRA_06](../index.html#INFRA_06).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/`
 
 ---
 
