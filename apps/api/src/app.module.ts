@@ -7,12 +7,13 @@ import { LinksModule } from './links/links.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ConfigModule } from './config/config.module';
+import { TodoModule } from './modules/todo';
 import { SharedModule } from './shared/shared.module';
 import { CodedErrorFilter } from './shared/presentation/coded-error.filter';
 import { CorrelationIdMiddleware } from './shared/presentation/correlation-id.middleware';
 
 @Module({
-  imports: [ConfigModule, SharedModule, LinksModule],
+  imports: [ConfigModule, SharedModule, TodoModule, LinksModule],
   controllers: [AppController],
   providers: [
     AppService,
