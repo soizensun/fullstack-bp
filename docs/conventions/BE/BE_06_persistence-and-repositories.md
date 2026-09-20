@@ -4,7 +4,7 @@ id: "BE_06"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_05]
 see_also: [INFRA_12, BE_15]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_12, BE_15]
 
 # [BE] Persistence & the repository pattern
 
-`P1` · `BE_06` · `draft` · `updated 2026-08-31`
+`P1` · `BE_06` · `draft` · `updated 2026-09-19`
 
 **Open when:** you need to read or write data.
 
@@ -27,9 +27,9 @@ If you read nothing else:
 2. <a id="R2"></a>A repository speaks domain only: it accepts and returns entities, or `null`, and it throws no workflow error.
 3. <a id="R3"></a>`save` returns `void`. A repository never returns what it just wrote.
 4. <a id="R4"></a>A mapper owns the translation between stored record and entity. Nothing else knows both shapes.
-5. <a id="R5"></a>Name the store in three places only — `infrastructure/`, a query service, an adapter. Nowhere else.
+5. <a id="R5"></a>Name the store in `infrastructure/` only — a repository, a query implementation, or an adapter. Nowhere else.
 6. <a id="R6"></a>One repository per aggregate root, loading and saving the whole aggregate.
-7. <a id="R7"></a>Read projections belong to a query service in `application/`, never to a repository.
+7. <a id="R7"></a>A read projection is answered by a query contract declared in `application/query-port/` and implemented in `infrastructure/`, never by a repository.
 8. <a id="R8"></a>A query service returns a projection, `null` or `[]` — never a record, never an entity, and never a thrown error.
 9. <a id="R9"></a>Keep the number of queries independent of the number of rows. Batch by ids; never query inside a loop.
 10. <a id="R10"></a>Derive the schema from the domain. Never let the store's shape dictate the model.
@@ -84,16 +84,17 @@ One file per aggregate translates both ways: record to entity through the rehydr
 
 **Enforcement:** review.
 
-### [R5](#R5) Three store-aware places, and no fourth
+### [R5](#R5) Store-aware places, and no others
+
+An earlier wording put a query service in `application/` and let it name the store. That made the application layer import infrastructure, which [BE_02#R1](../index.html#BE_02) forbids; [GEN_01#R7](../index.html#GEN_01) resolves the clash for the lower-numbered document, so the contract stays in `application/query-port/` and every store-aware file lives in `infrastructure/`.
 
 Persistence records live in `infrastructure/entity/`, declared separately from the domain entity even when the fields match today — once the two are one class, the coupling in [R10](#R10) is invisible.
 
-Three kinds of file may name the store, because querying it is their job:
+Three kinds of file may name the store, because querying it is their job, and all three live in `infrastructure/`:
 
-- `infrastructure/` — repositories and mappers.
-- A query service in `application/`, assembling a read projection ([R7](#R7)).
-- An adapter in `application/adapter/`, implementing a published port ([BE_03](../index.html#BE_03)).
-
+- A repository and its mapper, in `infrastructure/repository/` and `infrastructure/mapper/`.
+- A query implementation in `infrastructure/query/`, assembling a read projection behind the contract its use case depends on ([R7](#R7)).
+- An adapter in `infrastructure/`, implementing a port this module published ([BE_03](../index.html#BE_03)).
 
 Everything else is out: no persistence import in a use case, application service, DTO, controller or anything under `domain/`; no schema decorator on a domain class; no store type in a port or a projection. [BE_02#R7](../index.html#BE_02) is the general form of this rule.
 
@@ -187,7 +188,7 @@ The escape hatch: when a projection is too expensive to assemble per request, th
 - The port is in `domain/repository/`, the implementation in `infrastructure/repository/` ([R1](#R1)).
 - Repository signatures are domain types; no projection returned, nothing thrown, `save` returns `void` ([R2](#R2), [R3](#R3)).
 - A mapper is the only file that knows both shapes ([R4](#R4)).
-- The store is named only in `infrastructure/`, a query service or an adapter ([R5](#R5)).
+- The store is named only inside `infrastructure/` ([R5](#R5)).
 - The repository's unit is the aggregate, not the table ([R6](#R6)).
 - The need was routed through the table in [R7](#R7) before a construct was written.
 - Reads return a projection, `null` or `[]`, named by the vocabulary in [R8](#R8).
@@ -203,6 +204,8 @@ The escape hatch: when a projection is too expensive to assemble per request, th
 ## Related
 
 Requires [BE_05](../index.html#BE_05). See also [INFRA_12](../index.html#INFRA_12), [BE_15](../index.html#BE_15).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/infrastructure/`, `apps/api/src/modules/todo/domain/repository/`
 
 ---
 

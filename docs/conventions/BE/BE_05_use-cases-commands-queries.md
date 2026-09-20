@@ -4,7 +4,7 @@ id: "BE_05"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [BE_04]
 see_also: [BE_14]
 ---
@@ -13,7 +13,7 @@ see_also: [BE_14]
 
 # [BE] Use cases — application services, commands & queries
 
-`P1` · `BE_05` · `draft` · `updated 2026-08-31`
+`P1` · `BE_05` · `draft` · `updated 2026-09-19`
 
 **Open when:** you are writing the code that performs a business operation.
 
@@ -30,7 +30,7 @@ If you read nothing else:
 5. <a id="R5"></a>Inject the narrowest contract that covers the need, not the service that happens to implement it.
 6. <a id="R6"></a>Decide workflow failures here — absence, duplication, authorization context, wrong workflow state — as application errors.
 7. <a id="R7"></a>Accept a plain input object and return plain data. No transport type enters or leaves.
-8. <a id="R8"></a>Open at most one transaction per use case, covering the whole write.
+8. <a id="R8"></a>Open at most one transaction per use case, covering the whole write. Where the store has no transactions, one serialized read-modify-write takes its place.
 9. <a id="R9"></a>Put an effect that must not be lost inside the write; put an effect that may be retried after it.
 10. <a id="R10"></a>Never call a use case from another use case. Shared workflow becomes an application service.
 
@@ -180,6 +180,8 @@ Its read sibling, `GetArticleDetailUseCase`, injects one narrow contract ([R5](#
 ## Related
 
 Requires [BE_04](../index.html#BE_04). See also [BE_14](../index.html#BE_14).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/src/modules/todo/application/use-cases/`, `apps/api/src/modules/todo/application/service/`
 
 ---
 

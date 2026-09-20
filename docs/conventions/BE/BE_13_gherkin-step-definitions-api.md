@@ -4,7 +4,7 @@ id: "BE_13"
 area: "BE"
 tier: "P1"
 status: "draft"
-updated: "2026-08-31"
+updated: "2026-09-19"
 requires: [GEN_10, BE_12]
 see_also: [FE_15]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_15]
 
 # [BE] Gherkin step definitions & API scenarios
 
-`P1` · `BE_13` · `draft` · `updated 2026-08-31`
+`P1` · `BE_13` · `draft` · `updated 2026-09-19`
 
 **Open when:** a scenario from `features/` has to run against the API.
 
@@ -184,6 +184,8 @@ The browser half of this feature — if the same capability is also exercised th
 ## Related
 
 Requires [GEN_10](../index.html#GEN_10), [BE_12](../index.html#BE_12). See also [FE_15](../index.html#FE_15).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/test/steps/todo-list.steps.ts`, `features/todo-list.feature`
 
 ---
 

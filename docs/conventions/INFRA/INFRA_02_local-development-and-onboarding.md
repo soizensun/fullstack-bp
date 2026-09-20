@@ -3,8 +3,8 @@ title: "INFRA_02 · Local development & onboarding"
 id: "INFRA_02"
 area: "INFRA"
 tier: "P0"
-status: "draft"
-updated: "2026-08-31"
+status: "stable"
+updated: "2026-09-19"
 requires: [GEN_01]
 see_also: [INFRA_04, INFRA_07, INFRA_10]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_04, INFRA_07, INFRA_10]
 
 # [Infra] Local development & onboarding
 
-`P0` · `INFRA_02` · `draft` · `updated 2026-08-31`
+`P0` · `INFRA_02` · `stable` · `updated 2026-09-19`
 
 **Open when:** you need the project running on your machine.
 
