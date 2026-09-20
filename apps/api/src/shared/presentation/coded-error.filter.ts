@@ -18,16 +18,19 @@ import { CORRELATION_ID_HEADER, type CorrelatedRequest } from './correlation-id.
  */
 const STATUS_BY_CATEGORY: Readonly<Record<ErrorCategory, HttpStatus>> = {
   validation: HttpStatus.BAD_REQUEST,
-  'not-found': HttpStatus.NOT_FOUND,
+  not_found: HttpStatus.NOT_FOUND,
   conflict: HttpStatus.CONFLICT,
   forbidden: HttpStatus.FORBIDDEN,
 };
 
+/** BE_09 R8 — the one response shape every client parses once. */
 interface ErrorBody {
-  readonly code: string;
-  readonly message: string;
-  readonly correlationId: string;
-  readonly details?: unknown;
+  readonly error: {
+    readonly code: string;
+    readonly message: string;
+    readonly correlationId: string;
+    readonly details?: unknown;
+  };
 }
 
 /**
@@ -59,7 +62,7 @@ export class CodedErrorFilter implements ExceptionFilter {
     if (exception instanceof CodedError) {
       return {
         status: STATUS_BY_CATEGORY[exception.category],
-        body: { code: exception.code, message: exception.message, correlationId },
+        body: { error: { code: exception.code, message: exception.message, correlationId } },
       };
     }
 
@@ -71,10 +74,12 @@ export class CodedErrorFilter implements ExceptionFilter {
       return {
         status: HttpStatus.BAD_REQUEST,
         body: {
-          code: 'REQUEST_INVALID',
-          message: 'The request did not match the expected shape.',
-          correlationId,
-          ...(zodError instanceof ZodError ? { details: zodError.issues } : {}),
+          error: {
+            code: 'REQUEST_INVALID',
+            message: 'The request did not match the expected shape.',
+            correlationId,
+            ...(zodError instanceof ZodError ? { details: zodError.issues } : {}),
+          },
         },
       };
     }
@@ -82,7 +87,9 @@ export class CodedErrorFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       return {
         status: exception.getStatus(),
-        body: { code: httpCodeOf(exception.getStatus()), message: exception.message, correlationId },
+        body: {
+          error: { code: httpCodeOf(exception.getStatus()), message: exception.message, correlationId },
+        },
       };
     }
 
@@ -96,9 +103,11 @@ export class CodedErrorFilter implements ExceptionFilter {
     return {
       status: HttpStatus.INTERNAL_SERVER_ERROR,
       body: {
-        code: 'INTERNAL_ERROR',
-        message: 'Something went wrong. Quote the correlation id when reporting this.',
-        correlationId,
+        error: {
+          code: 'INTERNAL_ERROR',
+          message: 'Something went wrong. Quote the correlation id when reporting this.',
+          correlationId,
+        },
       },
     };
   }

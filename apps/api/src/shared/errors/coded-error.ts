@@ -7,7 +7,7 @@
  * to an HTTP status in one place, so adding an error never means touching the filter.
  */
 
-export type ErrorCategory = 'validation' | 'not-found' | 'conflict' | 'forbidden';
+export type ErrorCategory = 'validation' | 'not_found' | 'conflict' | 'forbidden';
 
 export abstract class CodedError extends Error {
   /** BE_09 R3 — from the catalogue, never renamed once shipped, never matched on by message. */

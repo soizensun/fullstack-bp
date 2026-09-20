@@ -173,7 +173,7 @@ The tempting shortcut is one query joining reports to articles, ordered and pagi
 
 ## Open questions
 
-- [R2](#R2), [R3](#R3) and [R4](#R4) are all decidable from the import graph and the export list, and none are checked today. [INFRA_06](../index.html#INFRA_06) owns them; until it exists, the barrel diff is review's only signal.
+- [R2](#R2) and [R3](#R3) are decidable from the export list and remain unchecked today; the barrel diff is review's only signal. [R4](#R4) is now checked by `apps/api/scripts/check-architecture.mjs` ([INFRA_06](../index.html#INFRA_06)).
 - [R7](#R7) is invisible to an import-graph check, because the coupling lives in a query string. Detecting it needs schema ownership recorded somewhere a linter can read — unsolved, and worth an ADR when it is solved.
 - [R8](#R8) has no threshold, deliberately. Whether a tiering scheme is worth writing down should be revisited once a project has enough modules to disagree about it.
 

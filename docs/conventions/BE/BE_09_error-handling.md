@@ -115,7 +115,7 @@ if (!article) throw new NotFoundException('Article not found');
 // unusable from a job, unsearchable by code, and 404 is now decided here
 ```
 
-**Enforcement:** review — an import of the framework's exception classes outside `presentation/` and `shared/` is checkable and is a candidate guardrail ([INFRA_06](../index.html#INFRA_06)).
+**Enforcement:** automated — `apps/api/scripts/check-architecture.mjs` flags a framework HTTP exception constructed outside `presentation/` ([INFRA_06](../index.html#INFRA_06)).
 
 ### [R7](#R7) Name the condition
 
