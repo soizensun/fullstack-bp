@@ -49,7 +49,7 @@ One file in `config/` touches `process.env`; every other file receives values th
 
 The rule extends to indirect reads: no framework helper that resolves a variable by name at a call site, and no library configured with a bare environment lookup somewhere in a module file.
 
-**Enforcement:** review — a lint rule banning `process.env` outside `config/` is the obvious guardrail and is a candidate for [INFRA_06](../index.html#INFRA_06); the boundary file itself carries the single documented exception.
+**Enforcement:** automated — `apps/api/scripts/check-architecture.mjs` flags a `process.env` read outside `config/configuration.ts` ([INFRA_06](../index.html#INFRA_06)); the boundary file itself carries the single documented exception.
 
 ### [R2](#R2) Fail fast, at boot
 
@@ -161,7 +161,7 @@ Finally, what the change looks like in review: a schema entry, an example entry,
 
 ## Open questions
 
-- [R1](#R1) is the rule this document exists for and the one most easily broken by a single convenient line; a lint rule would end the discussion permanently and belongs to [INFRA_06](../index.html#INFRA_06).
+- [R1](#R1) is the rule this document exists for and the one most easily broken by a single convenient line; it is now checked by `apps/api/scripts/check-architecture.mjs` ([INFRA_06](../index.html#INFRA_06)).
 - Secret rotation without a restart has no answer here: every value is parsed at boot, so rotating one means a deploy. That is acceptable at small scale and should be revisited when a secrets manager is introduced ([INFRA_07](../index.html#INFRA_07)).
 - Whether feature flags are configuration or their own subsystem is unresolved ([R6](#R6) pushes toward configuration); [INFRA_16](../index.html#INFRA_16) owns their lifecycle and the boundary between the two is not drawn.
 

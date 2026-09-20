@@ -97,7 +97,7 @@ domain/helpers.ts                   // a drawer, not a role
 infrastructure/index.ts             // an internal barrel (GEN_07#R6)
 ```
 
-**Enforcement:** review — a file-name pattern per role folder is checkable and is a candidate guardrail ([INFRA_06](../index.html#INFRA_06)).
+**Enforcement:** automated — `apps/api/scripts/check-architecture.mjs` checks every file under `modules/` for its role suffix ([INFRA_06](../index.html#INFRA_06)).
 
 ### [R7](#R7) Submodules and the shared kernel
 
@@ -166,7 +166,7 @@ When billing later grows its own aggregate, the directory becomes `modules/subsc
 
 ## Open questions
 
-- Every rule here is a path shape, and path shapes are the cheapest thing a machine can check. Until [INFRA_06](../index.html#INFRA_06) exists they are all review rules, and they are the highest-value guardrails the backend has.
+- Every rule here is a path shape, and path shapes are the cheapest thing a machine can check. [R6](#R6) and [R9](#R9) are now checked by `apps/api/scripts/check-architecture.mjs` ([INFRA_06](../index.html#INFRA_06)); the rest remain review rules and are the next highest-value guardrails the backend has.
 - Where a module's Gherkin step definitions live is unsettled — beside the module or in the app's test root. [BE_13](../index.html#BE_13) decides it; this document follows.
 
 ## Related

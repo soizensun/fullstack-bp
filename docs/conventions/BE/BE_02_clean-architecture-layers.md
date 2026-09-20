@@ -68,7 +68,7 @@ The table above says what may import what. The question that actually comes up i
 
 When two answers seem to fit, the code is doing two things. Split it before deciding where it lives.
 
-**Enforcement:** review — the import graph is exactly what an architecture test checks, and is the first guardrail [INFRA_06](../index.html#INFRA_06) should own.
+**Enforcement:** automated — `apps/api/scripts/check-architecture.mjs` checks the import graph for layer direction ([INFRA_06](../index.html#INFRA_06)).
 
 ### [R3](#R3) The domain imports nothing
 
@@ -103,7 +103,7 @@ export class Article {
 }
 ```
 
-**Enforcement:** review — an import allow-list for `**/domain/**` is checkable and is a candidate guardrail ([INFRA_06](../index.html#INFRA_06)).
+**Enforcement:** automated — `apps/api/scripts/check-architecture.mjs` enforces the import allow-list for `**/domain/**` ([INFRA_06](../index.html#INFRA_06)).
 
 ### [R4](#R4) The application layer uses DI, and stops there
 
@@ -207,7 +207,7 @@ Now the inverted version, which is what this document exists to prevent. Someone
 
 ## Open questions
 
-- Nothing enforces the import graph today, and this is the document whose violations are most expensive to unwind later — one leaked type spreads through every file that touches it. The layer test in [INFRA_06](../index.html#INFRA_06) is the highest-priority guardrail in the backend.
+- [R1](#R1) and [R3](#R3) are now checked by `apps/api/scripts/check-architecture.mjs` ([INFRA_06](../index.html#INFRA_06)). [R2](#R2) — nothing imports `presentation/` or `infrastructure/` — is not yet, and this is the document whose violations are most expensive to unwind later, since one leaked type spreads through every file that touches it.
 - The adapter exception in [R4](#R4) is a real hole in the layer rule, kept because moving adapters to `infrastructure/` costs a delegation layer for cross-module reads. It should be revisited once more than one module publishes ports.
 
 ## Related
