@@ -1,10 +1,10 @@
 ---
-title: "FE_02 · Atomic design — layer definitions & rules"
-id: "FE_02"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_02 · Atomic design — layer definitions & rules'
+id: 'FE_02'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [FE_01]
 see_also: [INFRA_06, FE_21]
 ---
@@ -13,7 +13,7 @@ see_also: [INFRA_06, FE_21]
 
 # [FE] Atomic design — layer definitions & rules
 
-`P1` · `FE_02` · `stable` · `updated 2026-08-25`
+`P1` · `FE_02` · `stable` · `updated 2026-09-22`
 
 **Open when:** you are creating a component and must decide what it is.
 
@@ -44,7 +44,7 @@ That makes the set testable rather than decorative. "Does this component know th
 
 ### [R1](#R1) Knowledge, not size
 
-Work down the questions, stopping at the first yes. Does it render at a URL? A page. Only arrange sections? A template. Know a domain concept, read data, or decide a business rule? An organism. Compose other components? A molecule. Otherwise, an atom. A thousand-line date picker is an atom if it knows only dates; a fourteen-line panel reading the signed-in user is an organism. The classification binds every component wherever it lives; only the *directory* is restricted, recording the level under `components/` and nowhere else ([FE_01#R6](../index.html#FE_01)), since a route-private component has one consumer and nothing to disambiguate. It still has a level and still obeys its limits.
+Work down the questions, stopping at the first yes. Does it render at a URL? A page. Only arrange sections? A template. Know a domain concept, read data, or decide a business rule? An organism. Compose other components? A molecule. Otherwise, an atom. A thousand-line date picker is an atom if it knows only dates; a fourteen-line panel reading the signed-in user is an organism. The classification binds every component wherever it lives; only the _directory_ is restricted, recording the level under `components/` and nowhere else ([FE_01#R6](../index.html#FE_01)), since a route-private component has one consumer and nothing to disambiguate. It still has a level and still obeys its limits.
 
 **Enforcement:** review — the questions are answerable by a reader, and by a machine only once the import graph is checked ([INFRA_06](../index.html#INFRA_06)).
 
@@ -126,7 +126,7 @@ When an atom needs a domain word or a molecule needs to read something, the answ
 
 ### [R9](#R9) Demote too
 
-The ladder runs both ways, and the downward direction is the one everybody skips — nothing prompts it, so attach it to the change that causes it: when the last privilege its level allows is gone — the last read *and* the last domain prop — move it in that change. Leaving it put keeps a component in a directory whose rules it no longer needs, and the level stops predicting what is inside. Demotion is also the cheapest reuse there is.
+The ladder runs both ways, and the downward direction is the one everybody skips — nothing prompts it, so attach it to the change that causes it: when the last privilege its level allows is gone — the last read _and_ the last domain prop — move it in that change. Leaving it put keeps a component in a directory whose rules it no longer needs, and the level stops predicting what is inside. Demotion is also the cheapest reuse there is.
 
 **Enforcement:** review — nothing notices that a component has stopped using a privilege.
 
@@ -175,6 +175,8 @@ Later a second surface renders the table over a customer's orders, which it alre
 ## Related
 
 Requires [FE_01](../index.html#FE_01). See also [INFRA_06](../index.html#INFRA_06), [FE_21](../index.html#FE_21).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/components/`, `apps/web/app/todo-lists/_components/`
 
 ---
 

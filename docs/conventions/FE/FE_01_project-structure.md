@@ -1,10 +1,10 @@
 ---
-title: "FE_01 · Project structure"
-id: "FE_01"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_01 · Project structure'
+id: 'FE_01'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [INFRA_01]
 see_also: [FE_02, FE_13]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_02, FE_13]
 
 # [FE] Project structure
 
-`P1` · `FE_01` · `stable` · `updated 2026-08-25`
+`P1` · `FE_01` · `stable` · `updated 2026-09-22`
 
 **Open when:** you do not know where a frontend file belongs.
 
@@ -36,7 +36,7 @@ If you read nothing else:
 
 ## Why
 
-Every frontend accumulates the same two failures. The first is a `components/` directory that becomes a junk drawer: things land there because someone might reuse them, nobody does, and after a year nobody can tell which files are load-bearing. The second is the opposite — a route folder that grows a whole application inside itself, so the next page needing that table copies it. Both come from one missing answer: *where does this file go, and what moves it*.
+Every frontend accumulates the same two failures. The first is a `components/` directory that becomes a junk drawer: things land there because someone might reuse them, nobody does, and after a year nobody can tell which files are load-bearing. The second is the opposite — a route folder that grows a whole application inside itself, so the next page needing that table copies it. Both come from one missing answer: _where does this file go, and what moves it_.
 
 The ladder below answers it mechanically. A file starts in the narrowest place that holds it and climbs only when a real second consumer appears, so its position is a fact about how widely it is used rather than a guess someone made on a Tuesday — and the tree becomes machine-readable, which is what lets the import rules in [INFRA_06](../index.html#INFRA_06) exist at all.
 
@@ -213,12 +213,14 @@ The table does not move, and neither does the transform: one route renders each,
 ## Open questions
 
 - [R5](#R5) and [R9](#R9) are the two rules most worth automating and the two nothing catches. Both are ordinary import-boundary checks — [INFRA_06](../index.html#INFRA_06) owns adding them.
-- [R9](#R9) and every `@/` import shown here need the app's TypeScript config to map the alias to the app root. Without it they do not resolve and the rule cannot be obeyed, so declaring it has to land with the first code that follows this document. It is the one open item here that blocks work rather than improving it.
+- ~~[R9](#R9) needs the app's TypeScript config to map the alias to the app root.~~ Closed: the web app declares `@/*`, so the imports shown here resolve. It was the one open item that blocked work rather than improving it.
 - [R6](#R6) puts the level in the path, so reclassifying a component touches every call site. [FE_02](../index.html#FE_02) should say whether that cost is acceptable at the atom/molecule line, where it happens most.
 
 ## Related
 
 Requires [INFRA_01](../index.html#INFRA_01). See also [FE_02](../index.html#FE_02), [FE_13](../index.html#FE_13).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/app/todo-lists/`, `apps/web/components/`, `apps/web/lib/`
 
 ---
 

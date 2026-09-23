@@ -1,10 +1,10 @@
 ---
-title: "FE_04 · Tailwind CSS conventions"
-id: "FE_04"
-area: "FE"
-tier: "P1"
-status: "draft"
-updated: "2026-08-31"
+title: 'FE_04 · Tailwind CSS conventions'
+id: 'FE_04'
+area: 'FE'
+tier: 'P1'
+status: 'draft'
+updated: '2026-09-22'
 requires: [FE_03]
 ---
 
@@ -12,7 +12,7 @@ requires: [FE_03]
 
 # [FE] Tailwind CSS conventions
 
-`P1` · `FE_04` · `draft` · `updated 2026-08-31`
+`P1` · `FE_04` · `draft` · `updated 2026-09-22`
 
 **Open when:** you are styling anything.
 
@@ -35,7 +35,7 @@ If you read nothing else:
 
 ## Why
 
-Utility classes solve one problem completely — the growing, unowned stylesheet where nobody can tell what a rule affects or whether deleting it is safe — and introduce one of their own: every value in the codebase becomes writable inline, so the design system holds only as long as everyone types the right utility. That is what the first two rules are for. When the theme is generated from the tokens and arbitrary values are impossible, the utility set *is* the design system, and a value that does not exist cannot be used ([FE_03](../index.html#FE_03)).
+Utility classes solve one problem completely — the growing, unowned stylesheet where nobody can tell what a rule affects or whether deleting it is safe — and introduce one of their own: every value in the codebase becomes writable inline, so the design system holds only as long as everyone types the right utility. That is what the first two rules are for. When the theme is generated from the tokens and arbitrary values are impossible, the utility set _is_ the design system, and a value that does not exist cannot be used ([FE_03](../index.html#FE_03)).
 
 The second half is about what utilities are bad at. A component with four visual options and conditional class strings becomes unreadable at the exact moment it becomes important, and two components that concatenate classes differently will conflict in ways that depend on stylesheet order rather than on intent. Declared variants and a conflict-aware merge remove both, and they are the two pieces of tooling this document actually requires.
 
@@ -45,7 +45,7 @@ Whether this framework is installed is a project fact — `PROJECT.md` is the on
 
 ### [R1](#R1) and [R2](#R2) The theme is the tokens, and nothing escapes it
 
-The framework's theme is generated from the token layer rather than typed alongside it: colors, spacing, radii, shadows, breakpoints, type scale, durations. Then `bg-surface-raised` and `p-4` *are* tokens, and there is no second scale competing with the first.
+The framework's theme is generated from the token layer rather than typed alongside it: colors, spacing, radii, shadows, breakpoints, type scale, durations. Then `bg-surface-raised` and `p-4` _are_ tokens, and there is no second scale competing with the first.
 
 Which is why arbitrary values are banned outright. An arbitrary value is a hardcoded design value with different syntax — the exact thing the hard rules forbid — and it is worse than a hardcoded value in CSS because it is invisible to a stylesheet audit and impossible to theme.
 
@@ -165,12 +165,14 @@ One thing does need CSS ([R9](#R9)): the pending state's spinner animation is a 
 ## Open questions
 
 - [R2](#R2) is the rule the whole document rests on and it is the easiest to break under deadline pressure. Until the arbitrary-value check exists ([INFRA_06](../index.html#INFRA_06)), this convention is one hurried change away from being decorative.
-- The document names variant and merge tooling by role rather than by package, since which library provides them is a project fact. That leaves the first implementation to set the precedent; it should be recorded in an ADR.
+- ~~The document names variant and merge tooling by role rather than by package; the first implementation sets the precedent and it should be recorded in an ADR.~~ Recorded in [ADR 0008](../../adr/0008-tailwind-with-cva-and-tailwind-merge.md). The document still names them by role, which is correct — the ADR is where the packages belong.
 - Where a shared component's variant map lives when both apps need the same options is unresolved, and interacts with [FE_13](../index.html#FE_13). Duplicating the map is the likely accident.
 
 ## Related
 
 Requires [FE_03](../index.html#FE_03).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `packages/tokens/src/theme.css`, `apps/web/components/`, `apps/web/lib/cn.util.ts`
 
 ---
 

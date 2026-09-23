@@ -1,0 +1,67 @@
+/*
+ * FE_04 R1 — the utility theme is *generated from the tokens*, so `bg-surface` and `p-4`
+ * are tokens rather than a second scale competing with the first. A utility that is not
+ * backed by something in `primitive.css` or `semantic.css` does not exist.
+ *
+ * Why the two names. `@theme` cannot be redeclared per selector, so it cannot hold the
+ * dark values itself. `inline` makes each utility emit `var(--surface)` rather than a
+ * copy of its value, which is what lets `semantic.css` swap the mode underneath without
+ * any component knowing (FE_03 R7).
+ *
+ * This file must be imported *after* `tailwindcss`.
+ */
+
+@theme inline {
+  /* surfaces → bg-surface, bg-surface-raised, … */
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-success: var(--surface-success);
+  --color-surface-warning: var(--surface-warning);
+  --color-surface-danger: var(--surface-danger);
+
+  /* text → text-body, text-muted, … (`text` alone is the font-size namespace) */
+  --color-body: var(--text);
+  --color-muted: var(--text-muted);
+  --color-success: var(--text-success);
+  --color-warning: var(--text-warning);
+  --color-danger: var(--text-danger);
+
+  /* action */
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-on-action: var(--on-action);
+
+  /* structure → border-subtle, border-strong, outline-focus */
+  --color-subtle: var(--border);
+  --color-strong: var(--border-strong);
+  --color-focus: var(--focus-ring);
+
+  /* spacing → p-1 … p-12, gap-*, m-* */
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-6: var(--space-6);
+  --spacing-8: var(--space-8);
+  --spacing-12: var(--space-12);
+
+  /* radii → rounded-sm … rounded-full */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  /* type → text-sm … text-xl */
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+
+  /* motion → duration-fast, duration-base */
+  --animate-duration-fast: var(--duration-fast);
+  --animate-duration-base: var(--duration-base);
+
+  /* fonts the app registers on :root */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}

@@ -1,10 +1,10 @@
 ---
-title: "GEN_08 · The BE↔FE contract"
-id: "GEN_08"
-area: "GEN"
-tier: "P0"
-status: "stable"
-updated: "2026-08-15"
+title: 'GEN_08 · The BE↔FE contract'
+id: 'GEN_08'
+area: 'GEN'
+tier: 'P0'
+status: 'stable'
+updated: '2026-09-22'
 requires: [GEN_01]
 see_also: [BE_07, BE_08, BE_09, FE_10, INFRA_14]
 ---
@@ -13,7 +13,7 @@ see_also: [BE_07, BE_08, BE_09, FE_10, INFRA_14]
 
 # [General] The BE↔FE contract — API types, error codes & correlation ids
 
-`P0` · `GEN_08` · `stable` · `updated 2026-08-15`
+`P0` · `GEN_08` · `stable` · `updated 2026-09-22`
 
 **Open when:** a change crosses the API boundary in either direction.
 
@@ -56,7 +56,7 @@ packages/api    the typed client + types  (generated, committed)
 apps/web        consumes; never redefines
 ```
 
-**Enforcement:** unenforced — the drift check that would catch this (regenerate, fail on a diff) needs the generation step to exist. See [Open questions](#open-questions).
+**Enforcement:** unenforced — the drift check that would catch this is now buildable, because the generation step exists: regenerate, then fail on a non-empty diff. Nothing runs it, and it is the cheapest outstanding guardrail this document wants ([INFRA_09](../index.html#INFRA_09)).
 
 ### [R4](#R4) Generated files: committed, never edited
 
@@ -112,14 +112,14 @@ One request id, generated as early as possible, sent by the web app on every cal
 
 The test is whether an existing consumer built against the old contract still works. Anything that fails that test is breaking, regardless of how small the diff looks.
 
-| Safe | Breaking |
-| --- | --- |
-| Adding an endpoint | Removing or renaming one |
-| Adding an optional request field | Adding a required one |
-| Adding a response field | Removing one, or making it optional |
-| Widening an accepted value set | Narrowing one, including a new enum member the consumer must handle |
-| Adding a new error code | Changing or retiring an existing code |
-| Loosening validation | Tightening it |
+| Safe                             | Breaking                                                            |
+| -------------------------------- | ------------------------------------------------------------------- |
+| Adding an endpoint               | Removing or renaming one                                            |
+| Adding an optional request field | Adding a required one                                               |
+| Adding a response field          | Removing one, or making it optional                                 |
+| Widening an accepted value set   | Narrowing one, including a new enum member the consumer must handle |
+| Adding a new error code          | Changing or retiring an existing code                               |
+| Loosening validation             | Tightening it                                                       |
 
 **Enforcement:** unenforced — an OpenAPI diff tool would classify most of this row-by-row in CI ([INFRA_09](../index.html#INFRA_09)).
 
@@ -176,14 +176,16 @@ The second version is faster to build once and wrong for every consumer after th
 
 ## Open questions
 
-- This document states the direction of ownership; whether the repository is wired that way today is tracked as an open decision in `PROJECT.md` §5. Until it is closed, check there before assuming the generation step exists, and do not build a second contract path in the meantime.
-- The generator, the OpenAPI version, and where the document lives are unnamed here on purpose — they are tooling choices that need an ADR ([GEN_13](../index.html#GEN_13)) rather than a paragraph.
+- ~~This document states the direction of ownership; whether the repository is wired that way today is tracked as an open decision in `PROJECT.md` §5.~~ Closed by [ADR 0006](../../adr/0006-the-contract-is-generated-from-the-api-app.md): the repository is now wired the way this document describes, and there is one contract path.
+- The generator, the OpenAPI version, and where the document lives are unnamed here on purpose — they are tooling choices, and they are now recorded in [ADR 0006](../../adr/0006-the-contract-is-generated-from-the-api-app.md) rather than in this paragraph.
 - [R7](#R7) calls a new enum member breaking. That is the strict reading and it is the safe one, but it makes some routine additions expensive. Whether consumers must handle unknown enum values gracefully instead is worth deciding once, explicitly.
 - Nothing here covers non-HTTP consumers — webhooks out, or a second client that is not the web app. [BE_23](../index.html#BE_23) owns the outbound direction; a second inbound consumer would need this document to grow a versioning policy it does not have.
 
 ## Related
 
 Requires [GEN_01](../index.html#GEN_01). See also [BE_07](../index.html#BE_07), [BE_08](../index.html#BE_08), [BE_09](../index.html#BE_09), [FE_10](../index.html#FE_10), [INFRA_14](../index.html#INFRA_14).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/api/openapi.json`, `packages/api/`, `apps/web/lib/api/`
 
 ---
 

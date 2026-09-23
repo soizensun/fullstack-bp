@@ -61,11 +61,13 @@ apps/
   api/          the API app. Entry src/main.ts, modules under src/
   web/          the web app. Routes in app/**, no src/ directory
 packages/
-  api/          @repo/api — types shared across the API↔web seam
+  api/          @repo/api — the generated contract client for the API↔web seam
+  tokens/       @repo/tokens — the design token layer
   ui/           @repo/ui — shared React components
   eslint-config/      shared flat lint configs
   typescript-config/  shared tsconfig bases
-  jest-config/        shared test-runner bases
+  jest-config/        shared test-runner bases (API)
+  vitest-config/      shared test-runner bases (web)
 docs/
   conventions/  index.html + the documents + assets/doc.css
   adr/          architecture decision records
@@ -98,6 +100,13 @@ bun run lint           # lint everything
 bun run format         # Prettier write across the repo
 ```
 
+Two tasks are not in that list because they are not run on every change:
+
+```bash
+turbo run contract:generate --filter=api   # regenerate the API contract and its client
+turbo run test:integration test:bdd        # the API's slower suites
+```
+
 Scope a task to one workspace with `turbo run <task> --filter=<name>` — for example
 `turbo run test --filter=api`.
 
@@ -111,7 +120,7 @@ Two questions you must answer from [`PROJECT.md`](PROJECT.md), never from memory
 this file:
 
 - **Is this library actually installed?** Writing code against something from the
-  *planned* column is the most common failure in this repository. If a task needs it, say
+  _planned_ column is the most common failure in this repository. If a task needs it, say
   so and propose the addition — do not quietly install it and write conventions around it.
 - **Is this decision settled?** `PROJECT.md` §5 lists the load-bearing ones that are not.
   If your task depends on one, stop and raise it. Do not settle it on your own.

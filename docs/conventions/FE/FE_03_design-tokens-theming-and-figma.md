@@ -1,10 +1,10 @@
 ---
-title: "FE_03 · Design tokens, theming & the Figma pipeline"
-id: "FE_03"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_03 · Design tokens, theming & the Figma pipeline'
+id: 'FE_03'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [FE_02]
 see_also: [FE_04, FE_06]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_04, FE_06]
 
 # [FE] Design tokens, theming & the Figma pipeline
 
-`P1` · `FE_03` · `stable` · `updated 2026-08-25`
+`P1` · `FE_03` · `stable` · `updated 2026-09-22`
 
 **Open when:** you need a color, a spacing, a font, an icon — or a designer changed one.
 
@@ -40,7 +40,7 @@ If you read nothing else:
 
 A hardcoded color is not a small mistake that stays small. It is a value the design system can no longer see, so the next rebrand, contrast fix or dark mode misses it — silently, because nothing fails. It surfaces months later as a screen subtly the wrong blue, fixed by a manual search of the whole tree. Tokens make that search unnecessary, and only if the ban is absolute: one exception restores the problem.
 
-The layering matters for the same reason. Components referencing raw values cannot be rethemed; those referencing primitives can be rethemed only by changing what *blue* means globally. A semantic layer gives one place where intent maps to appearance, and once it exists a theme is a second set of values for it — not a fork of the component tree.
+The layering matters for the same reason. Components referencing raw values cannot be rethemed; those referencing primitives can be rethemed only by changing what _blue_ means globally. A semantic layer gives one place where intent maps to appearance, and once it exists a theme is a second set of values for it — not a fork of the component tree.
 
 ## Rule detail
 
@@ -185,13 +185,15 @@ A week later the amber fails a contrast check. The fix lands in the design sourc
 ## Open questions
 
 - [R1](#R1) is a hard rule with no automated enforcement — the widest gap here. A lint rule rejecting literal colors, lengths and durations outside the token layer closes most of it and is the first guardrail to build ([INFRA_06](../index.html#INFRA_06)).
-- Every rule here presumes a token layer and a sync from the design source. Check `PROJECT.md` before relying on either; standing them up is a prerequisite of adopting this document and belongs in that file's stack table.
+- Every rule here presumes a token layer and a sync from the design source. The layer now exists; the sync does not, and `PROJECT.md` is still the only place that says so. Under [R6](#R6) that makes the token files the source of record, so they are hand-written and deliberately carry no generated-file header ([ADR 0008](../../adr/0008-tailwind-with-cva-and-tailwind-merge.md)). [R5](#R5), [R6](#R6)'s design-source half, [R8](#R8) and [R9](#R9) therefore have no worked example — [R8](#R8) most visibly, since with no source to generate from, the reference implementation ships no icons at all rather than pasting markup the rule forbids.
 - The sync direction is not fixed here — whether code pulls or the tool pushes on publish. Both satisfy every rule above and differ only in who notices drift first, and the choice is expensive enough to reverse that it wants an ADR ([GEN_13](../index.html#GEN_13)).
 - [R2](#R2) and [R7](#R7) are unenforced and each names its candidate check above. [R9](#R9) names none and is hardest to automate, being a conversation; the closest proxy is a check that no two semantic tokens resolve to the same primitive ([INFRA_06](../index.html#INFRA_06)).
 
 ## Related
 
 Requires [FE_02](../index.html#FE_02). See also [FE_04](../index.html#FE_04), [FE_06](../index.html#FE_06).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `packages/tokens/`
 
 ---
 

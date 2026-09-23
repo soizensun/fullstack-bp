@@ -1,10 +1,10 @@
 ---
-title: "FE_14 · Unit & component testing"
-id: "FE_14"
-area: "FE"
-tier: "P1"
-status: "draft"
-updated: "2026-08-31"
+title: 'FE_14 · Unit & component testing'
+id: 'FE_14'
+area: 'FE'
+tier: 'P1'
+status: 'draft'
+updated: '2026-09-22'
 requires: [FE_05]
 see_also: [FE_15, FE_21]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_15, FE_21]
 
 # [FE] Unit & component testing
 
-`P1` · `FE_14` · `draft` · `updated 2026-08-31`
+`P1` · `FE_14` · `draft` · `updated 2026-09-22`
 
 **Open when:** you wrote a component or a hook.
 
@@ -40,7 +40,7 @@ The failure mode this document exists to prevent is a suite that passes while th
 
 Testing through what a user perceives inverts that. A test that finds the button by its accessible name and asserts what appears afterwards keeps passing while the internals are rewritten, and fails when the product changes — including when a control quietly loses its accessible name, which is a real defect that no other test in the pipeline catches ([FE_06](../index.html#FE_06)).
 
-The mocking boundary follows from the same idea. The network is genuinely outside the thing under test, so it is the honest seam. A mocked child component is *inside* it: substituting one asserts that the parent talks to a fake correctly, which is true no matter how broken the real child is.
+The mocking boundary follows from the same idea. The network is genuinely outside the thing under test, so it is the honest seam. A mocked child component is _inside_ it: substituting one asserts that the parent talks to a fake correctly, which is true no matter how broken the real child is.
 
 Which runner and library the project uses is a fact in `PROJECT.md` — check there before adding a file, and propose one where none is configured rather than assuming.
 
@@ -98,12 +98,12 @@ If the hook holds logic worth testing without a component, that logic is a pure 
 
 The expectation differs by what a component is allowed to know ([FE_02](../index.html#FE_02)):
 
-| Level | Expectation |
-| --- | --- |
-| Atom | Every state it claims — variants, disabled, error, loading. They are cheap and they are the shared surface. |
-| Molecule | The behaviour it composes: what the arrangement does that the parts do not. |
-| Organism | The behaviours that matter — the states around data, the refusals, the empty and error cases. Not every branch. |
-| Template, page | Nothing here. Whole flows are the browser suite's ([FE_15](../index.html#FE_15)). |
+| Level          | Expectation                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------- |
+| Atom           | Every state it claims — variants, disabled, error, loading. They are cheap and they are the shared surface.     |
+| Molecule       | The behaviour it composes: what the arrangement does that the parts do not.                                     |
+| Organism       | The behaviours that matter — the states around data, the refusals, the empty and error cases. Not every branch. |
+| Template, page | Nothing here. Whole flows are the browser suite's ([FE_15](../index.html#FE_15)).                               |
 
 No global percentage target is set, deliberately. A number is satisfiable by tests that assert nothing, and chasing it produces exactly the implementation-shaped tests this document bans. Stories cover the visual states ([FE_21](../index.html#FE_21)); this suite covers what happens when someone interacts.
 
@@ -123,13 +123,13 @@ An order row with a cancel action.
 
 The suite is named for the capability, and each test for a promise ([BE_11#R2](../index.html#BE_11) states the same naming rule server-side). Rendering uses the shared helper that wraps the real providers ([R3](#R3)), and network handlers return an order fixture built by the shared builder ([R4](#R4), [R9](#R9)).
 
-*It shows the order's total and status.* Found by role and text, asserting the formatted total — which proves the mapper ran ([FE_10#R6](../index.html#FE_10)), not just that a string appeared.
+_It shows the order's total and status._ Found by role and text, asserting the formatted total — which proves the mapper ran ([FE_10#R6](../index.html#FE_10)), not just that a string appeared.
 
-*Cancelling asks for confirmation, then reports success.* A real click on the button found by its accessible name ([R2](#R2), [R5](#R5)); the dialog is asserted by its role and its own accessible name; confirming triggers the request the handler serves, and the success message is asserted as a live region rather than as text on the page ([R6](#R6)).
+_Cancelling asks for confirmation, then reports success._ A real click on the button found by its accessible name ([R2](#R2), [R5](#R5)); the dialog is asserted by its role and its own accessible name; confirming triggers the request the handler serves, and the success message is asserted as a live region rather than as text on the page ([R6](#R6)).
 
-*A shipped order cannot be cancelled.* The handler returns the error code from the catalogue, and the test asserts what the user sees — the reason, and that the row is still there ([FE_10#R7](../index.html#FE_10)). It does not assert the code, which is the client's concern, not the user's.
+_A shipped order cannot be cancelled._ The handler returns the error code from the catalogue, and the test asserts what the user sees — the reason, and that the row is still there ([FE_10#R7](../index.html#FE_10)). It does not assert the code, which is the client's concern, not the user's.
 
-*Focus returns to the cancel button when the dialog closes.* One line, and the only automated check that this works at all ([R6](#R6), [FE_06](../index.html#FE_06)).
+_Focus returns to the cancel button when the dialog closes._ One line, and the only automated check that this works at all ([R6](#R6), [FE_06](../index.html#FE_06)).
 
 What is deliberately absent: no test that the child row component received the right props ([R3](#R3)), no snapshot standing in for an assertion, and no test of the checkout flow that follows — that is one browser scenario, not twenty component tests ([R8](#R8), [FE_15](../index.html#FE_15)).
 
@@ -149,11 +149,15 @@ What is deliberately absent: no test that the child row component received the r
 
 - [R8](#R8) sets expectations per level with nothing to enforce them, and the level is derivable from the path ([FE_01#R6](../index.html#FE_01)) — so "a shared component with no spec" is checkable and is not checked.
 - The shared render helper and the request handlers are assumed to exist without a home. Where they live, and whether the handlers are shared with the browser suite ([FE_15](../index.html#FE_15)), should be decided before the second feature copies them.
-- No runner is named, because it is an open decision in `PROJECT.md`. Until it is closed, this document describes a suite the repository cannot run — which makes closing it the highest-value thing on the frontend.
+- ~~No runner is named, because it is an open decision in `PROJECT.md`.~~ Closed by [ADR 0007](../../adr/0007-vitest-is-the-web-test-runner.md). The document still names no runner, which is right; the project file does.
+- [R3](#R3) bans substituting a child component and [R4](#R4) puts the seam at the network, but a server action is neither and both: it is an HTTP endpoint the browser posts to ([FE_09#R5](../index.html#FE_09)), so replacing it is mocking the network — and it is also a module the component imports, so replacing it looks exactly like the thing [R3](#R3) forbids. The distinction matters because the action's module cannot be loaded in a test process at all. The reference implementation replaces the module and says why; the rule should say it rather than leaving each author to argue it.
+- [R8](#R8) puts nothing at the template and page level, and the runner cannot render an async server component, so a data-reading organism is covered by neither this suite nor — until [FE_15](../index.html#FE_15) has an implementation — any other.
 
 ## Related
 
 Requires [FE_05](../index.html#FE_05). See also [FE_15](../index.html#FE_15), [FE_21](../index.html#FE_21).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/lib/test/`, `apps/web/components/atoms/badge.test.tsx`, `apps/web/app/todo-lists/[listId]/_components/todo-item-list/todo-item-row.test.tsx`
 
 ---
 

@@ -1,0 +1,67 @@
+/*
+ * FE_03 R2 — layer one: primitives. These name *values*, so they are named for how they
+ * look, and that is correct here and nowhere above. Nothing outside `semantic.css` may
+ * reference one: a component reaching for `--grey-900` has asserted that this surface is
+ * dark grey in every theme, which is the assertion the layering exists to prevent.
+ *
+ * FE_03 R5 — these would be generated from the design source. `PROJECT.md` records none,
+ * so under FE_03 R6 this file is the source of record until one lands. It is hand-written
+ * on purpose and carries no "do not edit" header, because that would be a lie.
+ */
+
+:root {
+  /* ── palette ─────────────────────────────────────────────────────────────── */
+  --grey-0: #ffffff;
+  --grey-50: #f8fafc;
+  --grey-100: #f1f5f9;
+  --grey-200: #e2e8f0;
+  --grey-400: #94a3b8;
+  --grey-500: #64748b;
+  --grey-700: #334155;
+  --grey-800: #1e293b;
+  --grey-900: #0f172a;
+
+  --blue-100: #dbeafe;
+  --blue-400: #60a5fa;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+
+  --green-100: #dcfce7;
+  --green-700: #15803d;
+  --green-300: #86efac;
+
+  --amber-100: #fef3c7;
+  --amber-200: #fde68a;
+  --amber-700: #b45309;
+
+  --red-100: #fee2e2;
+  --red-300: #fca5a5;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+
+  /* ── spacing ─────────────────────────────────────────────────────────────── */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  /* ── radii ───────────────────────────────────────────────────────────────── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+
+  /* ── type scale ──────────────────────────────────────────────────────────── */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+
+  /* ── motion ──────────────────────────────────────────────────────────────── */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}

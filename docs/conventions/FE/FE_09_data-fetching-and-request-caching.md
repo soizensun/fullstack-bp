@@ -1,10 +1,10 @@
 ---
-title: "FE_09 · Data fetching & Next.js request caching"
-id: "FE_09"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_09 · Data fetching & Next.js request caching'
+id: 'FE_09'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [FE_08]
 see_also: [FE_10, FE_17]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_10, FE_17]
 
 # [FE] Data fetching & Next.js request caching
 
-`P1` · `FE_09` · `stable` · `updated 2026-08-25`
+`P1` · `FE_09` · `stable` · `updated 2026-09-22`
 
 **Open when:** a view needs data from the API.
 
@@ -44,7 +44,7 @@ Caching is where the same view gets fast or gets wrong, and both failures come f
 
 ### [R1](#R1) Read where you render
 
-The component that displays the data fetches it, even when two components in one route need the same thing: *identical* requests in one render pass are deduplicated to a single call. Identical is the operative word — two reads that merely overlap are two requests, and a read that bypasses the framework's request cache dedupes only if you memoize it per request. So share the call, not the result: lifting reads into the route file to prop-drill them couples every section to the page's data contract, and a section then cannot move without editing the route. The exception is data the page owns, such as the value deciding whether the route renders. What the call looks like — the client, the types, the correlation id — is [FE_10](../index.html#FE_10)'s.
+The component that displays the data fetches it, even when two components in one route need the same thing: _identical_ requests in one render pass are deduplicated to a single call. Identical is the operative word — two reads that merely overlap are two requests, and a read that bypasses the framework's request cache dedupes only if you memoize it per request. So share the call, not the result: lifting reads into the route file to prop-drill them couples every section to the page's data contract, and a section then cannot move without editing the route. The exception is data the page owns, such as the value deciding whether the route renders. What the call looks like — the client, the types, the correlation id — is [FE_10](../index.html#FE_10)'s.
 
 **Enforcement:** review — deduplication makes the good and bad versions behave identically, so only a reader can tell them apart.
 
@@ -220,6 +220,8 @@ One read deliberately breaks the pattern: the signed-in user's own drafts in the
 ## Related
 
 Requires [FE_08](../index.html#FE_08). See also [FE_10](../index.html#FE_10), [FE_17](../index.html#FE_17).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/lib/api/todo.service.ts`, `apps/web/app/todo-lists/_lib/todo-list.action.ts`, `apps/web/app/todo-lists/[listId]/_lib/todo-item.action.ts`
 
 ---
 

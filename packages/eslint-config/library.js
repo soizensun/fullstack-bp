@@ -1,3 +1,4 @@
+import globals from "globals";
 import { config as baseConfig } from "./base.js";
 
 /**
@@ -9,17 +10,16 @@ export const libraryConfig = [
   ...baseConfig,
   {
     languageOptions: {
+      // Flat config has no `env` key; Node's globals are declared here instead. The
+      // eslintrc spelling this replaced was not merely ignored — ESLint refuses to start
+      // on it, so this config could never have run.
       globals: {
-        React: true,
-        JSX: true,
+        ...globals.node,
       },
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
       },
-    },
-    env: {
-      node: true,
     },
     settings: {
       "import/resolver": {

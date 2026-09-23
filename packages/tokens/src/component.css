@@ -1,0 +1,19 @@
+/*
+ * FE_03 R4 — layer three: component tokens, for a component that departs from the
+ * semantic layer *by design*. This is the escape hatch, and it is load-bearing because it
+ * is rare: a set where every component has its own tokens has re-created hardcoded values
+ * with longer names and a build step.
+ *
+ * Two entries, both genuine departures. Before adding a third, check whether the need is
+ * really a missing semantic token — it usually is.
+ */
+
+:root {
+  /*
+   * The focus ring's thickness is not a spacing step. Rounding it to `--space-1` would
+   * make every focus outline 4px, which fails FE_06 R5's "more visible, not merely
+   * different" at small controls.
+   */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
