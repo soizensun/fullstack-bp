@@ -1,10 +1,10 @@
 ---
-title: "FE_05 · Component API conventions"
-id: "FE_05"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_05 · Component API conventions'
+id: 'FE_05'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [FE_02]
 see_also: [FE_06]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_06]
 
 # [FE] Component API conventions
 
-`P1` · `FE_05` · `stable` · `updated 2026-08-25`
+`P1` · `FE_05` · `stable` · `updated 2026-09-22`
 
 **Open when:** you are deciding what props a component takes.
 
@@ -179,7 +179,7 @@ export function IconButton({ label, onClick }: IconButtonProps) {
 
 ### [R7](#R7) Accessibility props pass through
 
-A caller labelling your component, associating it with a description, or marking it current must be able to. Extending the element's props ([R6](#R6)) gives you this for free; a hand-listed props type takes it away, and the caller's only remaining option is a wrapper element that changes the layout. When a component renders several elements, route these deliberately — the label belongs on the control, not on the decorative container around it. Which attributes a component *must* carry is [FE_06](../index.html#FE_06)'s subject, not this one's.
+A caller labelling your component, associating it with a description, or marking it current must be able to. Extending the element's props ([R6](#R6)) gives you this for free; a hand-listed props type takes it away, and the caller's only remaining option is a wrapper element that changes the layout. When a component renders several elements, route these deliberately — the label belongs on the control, not on the decorative container around it. Which attributes a component _must_ carry is [FE_06](../index.html#FE_06)'s subject, not this one's.
 
 **Enforcement:** review — accessibility linting catches missing attributes, not ones a component refuses to accept ([FE_06](../index.html#FE_06)).
 
@@ -260,6 +260,8 @@ Two months on, every caller passes `dismissible={false}`. That is not a decision
 ## Related
 
 Requires [FE_02](../index.html#FE_02). See also [FE_06](../index.html#FE_06).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/components/atoms/`, `apps/web/components/molecules/page-header.tsx`
 
 ---
 

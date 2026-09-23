@@ -1,0 +1,92 @@
+/*
+ * FE_03 R2 — layer two: intent, expressed in terms of the primitives. This is the only
+ * layer a component ever sees (through the utilities `theme.css` derives from it).
+ *
+ * FE_03 R3 — every name here says the role it plays, never how it looks. `--text-danger`,
+ * not `--text-red`: the day danger stops being red, a role name is still true and an
+ * appearance name is a lie every consumer repeats.
+ *
+ * FE_03 R7 — dark mode is *this file with different values*. Nothing below knows a theme
+ * exists, no component branches on one, and adding a third mode means adding a third
+ * block here and touching no component at all.
+ */
+
+:root {
+  /* surfaces */
+  --surface: var(--grey-0);
+  --surface-raised: var(--grey-50);
+  --surface-sunken: var(--grey-100);
+  --surface-success: var(--green-100);
+  --surface-warning: var(--amber-100);
+  --surface-danger: var(--red-100);
+
+  /* text */
+  --text: var(--grey-900);
+  --text-muted: var(--grey-500);
+  --text-success: var(--green-700);
+  --text-warning: var(--amber-700);
+  --text-danger: var(--red-700);
+
+  /* action */
+  --action: var(--blue-600);
+  --action-hover: var(--blue-700);
+  --on-action: var(--grey-0);
+
+  /* structure */
+  --border: var(--grey-200);
+  --border-strong: var(--grey-400);
+  --focus-ring: var(--blue-600);
+}
+
+/*
+ * The two dark blocks carry the same values on purpose. The media query follows the
+ * reader's system preference; the attribute lets anything set it explicitly and win,
+ * which is what makes a theme switch — and a screenshot of either mode — possible later.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --surface: var(--grey-900);
+    --surface-raised: var(--grey-800);
+    --surface-sunken: var(--grey-900);
+    --surface-success: var(--green-700);
+    --surface-warning: var(--amber-700);
+    --surface-danger: var(--red-700);
+
+    --text: var(--grey-50);
+    --text-muted: var(--grey-400);
+    --text-success: var(--green-300);
+    --text-warning: var(--amber-200);
+    --text-danger: var(--red-300);
+
+    --action: var(--blue-400);
+    --action-hover: var(--blue-100);
+    --on-action: var(--grey-900);
+
+    --border: var(--grey-700);
+    --border-strong: var(--grey-500);
+    --focus-ring: var(--blue-400);
+  }
+}
+
+:root[data-theme='dark'] {
+  --surface: var(--grey-900);
+  --surface-raised: var(--grey-800);
+  --surface-sunken: var(--grey-900);
+  --surface-success: var(--green-700);
+  --surface-warning: var(--amber-700);
+  --surface-danger: var(--red-700);
+
+  --text: var(--grey-50);
+  --text-muted: var(--grey-400);
+  --text-success: var(--green-300);
+  --text-warning: var(--amber-200);
+  --text-danger: var(--red-300);
+
+  --action: var(--blue-400);
+  --action-hover: var(--blue-100);
+  --on-action: var(--grey-900);
+
+  --border: var(--grey-700);
+  --border-strong: var(--grey-500);
+  --focus-ring: var(--blue-400);
+}

@@ -8,11 +8,12 @@
       "cache": false,
       "persistent": true,
       "env": [
+        "API_BASE_URL",
+        "NODE_ENV",
+        "PORT",
         "TODO_DATA_DIR",
         "TODO_DEFAULT_PAGE_SIZE",
-        "TODO_MAX_PAGE_SIZE",
-        "NODE_ENV",
-        "PORT"
+        "TODO_MAX_PAGE_SIZE"
       ]
     },
     "build": {
@@ -26,21 +27,26 @@
         "dist/**"
       ],
       "env": [
+        "API_BASE_URL",
+        "NODE_ENV",
+        "PORT",
         "TODO_DATA_DIR",
         "TODO_DEFAULT_PAGE_SIZE",
-        "TODO_MAX_PAGE_SIZE",
-        "NODE_ENV",
-        "PORT"
+        "TODO_MAX_PAGE_SIZE"
       ]
+    },
+    "contract:generate": {
+      "cache": false
     },
     "lint": {},
     "test": {
       "env": [
+        "API_BASE_URL",
+        "NODE_ENV",
+        "PORT",
         "TODO_DATA_DIR",
         "TODO_DEFAULT_PAGE_SIZE",
-        "TODO_MAX_PAGE_SIZE",
-        "NODE_ENV",
-        "PORT"
+        "TODO_MAX_PAGE_SIZE"
       ]
     },
     "test:e2e": {

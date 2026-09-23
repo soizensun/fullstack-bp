@@ -1,10 +1,10 @@
 ---
-title: "FE_06 · Accessibility standard"
-id: "FE_06"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_06 · Accessibility standard'
+id: 'FE_06'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [FE_05]
 see_also: [FE_16]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_16]
 
 # [FE] Accessibility standard
 
-`P1` · `FE_06` · `stable` · `updated 2026-08-25`
+`P1` · `FE_06` · `stable` · `updated 2026-09-22`
 
 **Open when:** you render anything interactive — a control, a dialog, a form field.
 
@@ -177,12 +177,14 @@ expect(within(dialog).getByRole('button', { name: 'Cancel' })).toHaveFocus();
 ## Open questions
 
 - Every rule here is `review` or `unenforced`, and accessibility is where that matters most, because the person who would notice the defect is not on the team. Four would cover much of it and none exists: an accessibility lint plugin ([R2](#R2), [R3](#R3), [R7](#R7)), a contrast computation over the token pairs ([R9](#R9)), a grep for outline resets ([R5](#R5)), and required assertions in component tests ([R10](#R10)) — [INFRA_06](../index.html#INFRA_06)'s, in that order. None establishes conformance itself ([R1](#R1)), which no tool can.
-- [R10](#R10) presumes a component test runner for the web app. Check `PROJECT.md` — where none is recorded the rule binds the first tests written, and choosing the runner belongs in that file.
+- ~~[R10](#R10) presumes a component test runner for the web app, and none was recorded.~~ Closed by [ADR 0007](../../adr/0007-vitest-is-the-web-test-runner.md). What remains is narrower: [R10](#R10)'s assertions cannot reach a component that reads data, because the test runner cannot render an async server component. Those are the components most likely to lose a name.
 - Automated checks reach perhaps a third of AA, and this document does not say what covers the rest. A manual keyboard and screen-reader pass is the usual answer; which flows, and how often, is a product decision.
 
 ## Related
 
 Requires [FE_05](../index.html#FE_05). See also [FE_16](../index.html#FE_16).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/app/todo-lists/[listId]/_components/`, `apps/web/app/globals.css`
 
 ---
 

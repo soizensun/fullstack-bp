@@ -1,8 +1,10 @@
-import { type MiddlewareConsumer, Module, type NestModule } from '@nestjs/common';
+import {
+  type MiddlewareConsumer,
+  Module,
+  type NestModule,
+} from '@nestjs/common';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
-
-import { LinksModule } from './links/links.module';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
@@ -13,7 +15,7 @@ import { CodedErrorFilter } from './shared/presentation/coded-error.filter';
 import { CorrelationIdMiddleware } from './shared/presentation/correlation-id.middleware';
 
 @Module({
-  imports: [ConfigModule, SharedModule, TodoModule, LinksModule],
+  imports: [ConfigModule, SharedModule, TodoModule],
   controllers: [AppController],
   providers: [
     AppService,

@@ -1,10 +1,10 @@
 ---
-title: "FE_10 · Typed API client & contract consumption"
-id: "FE_10"
-area: "FE"
-tier: "P1"
-status: "draft"
-updated: "2026-08-31"
+title: 'FE_10 · Typed API client & contract consumption'
+id: 'FE_10'
+area: 'FE'
+tier: 'P1'
+status: 'draft'
+updated: '2026-09-22'
 requires: [GEN_08, FE_09]
 ---
 
@@ -12,7 +12,7 @@ requires: [GEN_08, FE_09]
 
 # [FE] Typed API client & contract consumption
 
-`P1` · `FE_10` · `draft` · `updated 2026-08-31`
+`P1` · `FE_10` · `draft` · `updated 2026-09-22`
 
 **Open when:** you are calling the backend, or the contract changed under you.
 
@@ -135,13 +135,15 @@ Then the backend renames a field. The contract regenerates in its own change ([R
 
 ## Open questions
 
-- Where view-model mappers live — beside the client, beside the feature, or beside the route — is undecided, and the first two features will choose differently. It should be settled with [FE_01](../index.html#FE_01)'s ladder in mind.
+- Where view-model mappers live — beside the client, beside the feature, or beside the route — is undecided, and the first two features will choose differently. It should be settled with [FE_01](../index.html#FE_01)'s ladder in mind. The reference implementation puts them beside the client, in `lib/api/`, because the mapper is what a contract change lands on and keeping it next to the client keeps that blast radius one directory wide — one data point, not a decision.
 - Nothing here says how a client-side call, where one is justified ([FE_09#R9](../index.html#FE_09)), obtains the correlation id started on the server. The two halves are meant to share one id per user action, and the mechanism is unwritten.
-- Contract generation depends on an unresolved decision in `PROJECT.md` about which side owns the contract in this repository today. Until that is closed, [R2](#R2) is the rule most at risk of being quietly broken.
+- ~~Contract generation depends on an unresolved decision in `PROJECT.md` about which side owns the contract in this repository today.~~ Closed by [ADR 0006](../../adr/0006-the-contract-is-generated-from-the-api-app.md): the client is generated and committed. [R2](#R2) is no longer at risk of being broken quietly, but nothing yet fails a build when the committed output is stale — the drift check is [INFRA_09](../index.html#INFRA_09)'s and does not exist.
 
 ## Related
 
 Requires [GEN_08](../index.html#GEN_08), [FE_09](../index.html#FE_09).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `packages/api/`, `apps/web/lib/api/`
 
 ---
 

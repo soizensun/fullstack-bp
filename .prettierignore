@@ -1,0 +1,15 @@
+# GEN_08 R4 — generated files are build output: committed, never edited. Formatting them
+# produces a diff the next generation discards, which is how a "harmless" edit to a
+# generated file gets normalised into looking deliberate.
+apps/api/openapi.json
+packages/api/src/generated/
+
+# GEN_13 fixes the ADR header layout — `Status:`, `Date:` and `Deciders:` are aligned in
+# its template and in every record. Prettier normalises those runs of spaces away, so
+# formatting an ADR silently breaks the convention it is written to.
+docs/adr/
+
+# Build output and dependencies.
+**/dist/
+**/.next/
+**/node_modules/

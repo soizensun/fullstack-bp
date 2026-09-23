@@ -1,0 +1,12 @@
+/*
+ * The whole token layer, in the one order that works: values, then intent, then the
+ * departures, then the utility theme derived from all three (FE_03 R2).
+ *
+ * `theme.css` must land after `tailwindcss` itself, so an app imports Tailwind first and
+ * this file second — see `apps/web/app/globals.css`.
+ */
+
+@import './primitive.css';
+@import './semantic.css';
+@import './component.css';
+@import './theme.css';

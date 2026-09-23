@@ -1,10 +1,10 @@
 ---
-title: "FE_08 · Server vs Client components"
-id: "FE_08"
-area: "FE"
-tier: "P1"
-status: "stable"
-updated: "2026-08-25"
+title: 'FE_08 · Server vs Client components'
+id: 'FE_08'
+area: 'FE'
+tier: 'P1'
+status: 'stable'
+updated: '2026-09-22'
 requires: [FE_01]
 see_also: [FE_09, FE_20]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_09, FE_20]
 
 # [FE] Server vs Client components
 
-`P1` · `FE_08` · `stable` · `updated 2026-08-25`
+`P1` · `FE_08` · `stable` · `updated 2026-09-22`
 
 **Open when:** you are about to write `'use client'`.
 
@@ -205,6 +205,8 @@ Later, the page needs a toast after an action. The temptation is a directive on 
 ## Related
 
 Requires [FE_01](../index.html#FE_01). See also [FE_09](../index.html#FE_09), [FE_20](../index.html#FE_20).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/app/todo-lists/`
 
 ---
 

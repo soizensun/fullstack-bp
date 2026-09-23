@@ -1,0 +1,16 @@
+{
+  "name": "@repo/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./src/tokens.css",
+    "./primitive.css": "./src/primitive.css",
+    "./semantic.css": "./src/semantic.css",
+    "./component.css": "./src/component.css",
+    "./theme.css": "./src/theme.css"
+  },
+  "files": [
+    "src"
+  ]
+}

@@ -1,10 +1,10 @@
 ---
-title: "FE_11 · Routing & navigation"
-id: "FE_11"
-area: "FE"
-tier: "P1"
-status: "draft"
-updated: "2026-08-31"
+title: 'FE_11 · Routing & navigation'
+id: 'FE_11'
+area: 'FE'
+tier: 'P1'
+status: 'draft'
+updated: '2026-09-22'
 requires: [FE_08]
 see_also: [FE_12, FE_18]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_12, FE_18]
 
 # [FE] Routing & navigation
 
-`P1` · `FE_11` · `draft` · `updated 2026-08-31`
+`P1` · `FE_11` · `draft` · `updated 2026-09-22`
 
 **Open when:** you are adding or restructuring a route.
 
@@ -160,10 +160,13 @@ Two decisions worth noting. The layout holds the chrome and no order data, even 
 - [R7](#R7) says a schema per route but does not say where it lives or whether the client and server share one parser. The first two routes will answer it differently unless someone decides; it interacts with [FE_10](../index.html#FE_10)'s client.
 - Nothing here covers route-level authorization — where the decision is made, and how a redirect avoids leaking whether a resource exists. That is [FE_19](../index.html#FE_19)'s, and until it exists [R9](#R9) is the only guidance.
 - Whether URL moves are kept in the routing configuration forever or expire is undecided, and the list only grows.
+- [R5](#R5) and [R6](#R6) cannot both hold on a route that streams, and [R5](#R5) is one of the two things that makes a route stream. A segment's error file is a client boundary and a slow section's Suspense boundary ([FE_09#R7](../index.html#FE_09)) is another; with either present the response has already been sent as `200` by the time `notFound()` runs, so the not-found UI renders under a success status. Measured on the reference implementation, not inferred: removing the error boundary alone restores the `404`. The framework injects `noindex`, which covers [R6](#R6)'s search-engine reasoning but not its monitoring reasoning. The available fix — checking existence at the edge, before the response streams — buys the status with an API call on every request to the route. This document should say which way that trade goes rather than leaving each route to decide.
 
 ## Related
 
 Requires [FE_08](../index.html#FE_08). See also [FE_12](../index.html#FE_12), [FE_18](../index.html#FE_18).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/app/`
 
 ---
 

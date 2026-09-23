@@ -1,10 +1,10 @@
 ---
-title: "FE_07 · Building a component end to end"
-id: "FE_07"
-area: "FE"
-tier: "P1"
-status: "draft"
-updated: "2026-08-31"
+title: 'FE_07 · Building a component end to end'
+id: 'FE_07'
+area: 'FE'
+tier: 'P1'
+status: 'draft'
+updated: '2026-09-22'
 requires: [FE_06]
 see_also: [FE_14, FE_21]
 ---
@@ -13,7 +13,7 @@ see_also: [FE_14, FE_21]
 
 # [FE] Building a component end to end
 
-`P1` · `FE_07` · `draft` · `updated 2026-08-31`
+`P1` · `FE_07` · `draft` · `updated 2026-09-22`
 
 **Open when:** you have been handed a Figma frame and told to build it.
 
@@ -151,6 +151,8 @@ A frame for an order row: avatar, customer name, status pill, amount, a menu but
 ## Related
 
 Requires [FE_06](../index.html#FE_06). See also [FE_14](../index.html#FE_14), [FE_21](../index.html#FE_21).
+
+Reference implementation, where `PROJECT.md` §3 still lists it: `apps/web/components/atoms/badge.tsx` with `apps/web/components/atoms/badge.test.tsx`
 
 ---
 
